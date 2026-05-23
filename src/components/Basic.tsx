@@ -4,6 +4,12 @@ import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./shadcnui/popover";
 import { Button } from "./shadcnui/button";
 import { Calendar } from "./shadcnui/calendar";
+import {
+  formatDistanceToNow,
+  isBefore,
+  startOfToday,
+  startOfTomorrow,
+} from "date-fns";
 
 const Basic = () => {
   const [open, setOpen] = useState(false);
@@ -11,7 +17,13 @@ const Basic = () => {
 
   return (
     <div className="grid gap-4">
-      <h1 className=""></h1>
+      <h1 className="text-center text-lg">
+        {date ?
+          isBefore(date, startOfTomorrow()) ?
+            `You are ${formatDistanceToNow(date)} old`
+          : `You will be ${formatDistanceToNow(date)} old`
+        : "Select your date of birth"}
+      </h1>
 
       <Popover
         open={open}
@@ -29,7 +41,7 @@ const Basic = () => {
 
         <PopoverContent
           className="w-auto overflow-hidden p-0"
-          align="start">
+          align="center">
           <Calendar
             mode="single"
             selected={date}
