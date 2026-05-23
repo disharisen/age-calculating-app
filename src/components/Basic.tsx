@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "./shadcnui/popover";
-import { Button } from "./shadcnui/button";
-import { Calendar } from "./shadcnui/calendar";
 import {
+  format,
   formatDistanceToNow,
   isBefore,
-  startOfToday,
   startOfTomorrow,
 } from "date-fns";
+import { useState } from "react";
+import { Button } from "./shadcnui/button";
+import { Calendar } from "./shadcnui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./shadcnui/popover";
+import { CalendarDaysIcon } from "lucide-react";
 
 const Basic = () => {
   const [open, setOpen] = useState(false);
@@ -33,8 +34,8 @@ const Basic = () => {
             <Button
               variant="outline"
               id="date"
-              className="justify-start font-normal">
-              {date ? date.toLocaleDateString() : "Select date"}
+              className="justify-between">
+              {date ? format(date, "PPPP") : "Select date"} <CalendarDaysIcon />
             </Button>
           }
         />
